@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Application de relevé des territoires</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@0.7.1/dist/vue-material.css">
+</head>
+
+<body>
+    <div id="app">
+        <md-toolbar>
+            <md-button class="md-icon-button" @click.native="openMenu">
+                <md-icon>menu</md-icon>
+            </md-button>
+            <h1 class="md-title">{{title()}}</h1>
+        </md-toolbar>
+
+        <md-sidenav class="md-left" ref="leftMenu">
+            <md-toolbar class="md-large">
+                <div class="md-toolbar-container">
+                    <h3 class="md-title">Menu</h3>
+                </div>
+                <md-list>
+                    <md-list-item>
+                        <md-icon>assignment_turned_in</md-icon> <span>Relevés</span>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon>compare_arrows</md-icon> <span>Affectations des relevés</span>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon>device_hub</md-icon> <span>Annotations</span>
+                    </md-list-item>
+                </md-list>
+            </md-toolbar>
+        </md-sidenav>
+        <div id="main-page" v-if="meta.page == 'statements'" class="page">
+            <div class="statement__content">
+                <div class="split__list">
+                    <md-tabs>
+                        <md-tab id="split-list" md-label="Portions">
+                            <md-list class="split__list__inner">
+                                <md-list-item v-for="ter in splits" :class="{'territory-split-item' : true, 'territory-split-item--selected' : (split ? split.ref == ter.ref : false)}"
+                                    @click.native="selectSplit(ter)">
+                                    <div class="md-list-text-container">
+                                        <span>{{ter.ref}}</span>
+                                        <span>{{labelState(ter)}}</span>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                        </md-tab>
+                    </md-tabs>
+                </div>
+                <div class="split__detail">
+                    <md-tabs v-if="!split"></md-tabs>
+                    <md-tabs v-if="split">
+                        <md-tab id="splitMetadata" md-label="Général" :md-active="true">
+                            <h2>Portion de territoire : {{split.ref}}</h2>
+                            <md-input-container>
+                                <label>Proclamateurs en charge</label>
+                                <md-input v-model="split.meta.owner"></md-input>
+                            </md-input-container>
+                            <md-input-container>
+                                <label for="movie">Etat de la portion</label>
+                                <md-select name="state" id="movie" v-model="split.meta.state">
+                                    <md-option value="">Pas commencé</md-option>
+                                    <md-option value="started">Commencé</md-option>
+                                    <md-option value="done">Fini</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-button class="md-raised md-primary">Enregistrer</md-button>
+                            <h3>Documents</h3>
+                            <iframe :src="embedDrive(split.linkId)" class="split__iframe"></iframe>
+                        </md-tab>
+                        <md-tab id="split-statement" md-label="Relevé">
+                            <note :data="note" v-for="note in split.notes"></note>
+                            <md-button class="md-raised md-primary button-notes" @click.native="addNewNote(split.notes)">Nouvelle entité</md-button>
+                        </md-tab>
+                    </md-tabs>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdn.jsdelivr.net/pouchdb/6.2.0/pouchdb.min.js"></script>
+    <script src="https://unpkg.com/vue@2.3.4"></script>
+    <script src="https://unpkg.com/vue-router@2.5.3"></script>
+    <script src="https://unpkg.com/vue-material@0.7.1"></script>
+    <script src="app.js"></script>
+</body>
+</html>
