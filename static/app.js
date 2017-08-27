@@ -1,20 +1,19 @@
 Vue.use(VueMaterial);
 
-var db = new restdb("e29881fb0e3b9546c89500c4e2ccffa50b492", {});
 var portions = db.portions;
+
+
+Vue.use('territory', {
+    template : `
+        <div>Territory template</div> 
+    `
+})
+
+
 const APP = new Vue({
     el: "#app",
     created : function(){
         this.loading = true;
-        portions.find({}, {}, (err, data) => {
-            console.log('data', err, data);
-            if(!err){
-                if(data){
-                    this.portions = data;
-                }
-            }
-            this.loading = false;
-        })
     },
     data: function () {
         return {
