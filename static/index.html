@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Application de relevé des territoires HEROKU</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/app.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@0.7.1/dist/vue-material.css">
+</head>
+
+<body>
+    <div id="app">
+        <md-toolbar>
+            <h1 class="md-title">Nouveaux Territoires</h1>
+        </md-toolbar>
+        <div id="main-page">
+            <md-tabs>
+                <md-tab id="split-list" md-label="Portions">
+                    <md-tabs v-if="!loading">
+                        <md-tab :md-label="portion.name" v-for="portion in sortedPortions" :key="portion.name">
+                            {{portion.name}}
+                        </md-tab>
+                    </md-tabs>
+                </md-tab>
+            </md-tabs>
+        </div>
+    </div>
+    <script src="https://unpkg.com/jquery@3.2.1"></script>
+    <script src="https://unpkg.com/vue@2.3.4"></script>
+    <script src="https://unpkg.com/vue-material@0.7.1"></script>
+    <script src="/app.js"></script>
+</body>
+</html>
