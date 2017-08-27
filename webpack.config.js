@@ -7,6 +7,7 @@ module.exports = {
     },
     output: {
         filename: '[name].[hash].js',
+        publicPath : '/static/',
         path: path.resolve(__dirname, 'static')
     },
     devtool : "cheap-sourcemap",
@@ -19,7 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: [
                     'style-loader',
                     'css-loader',

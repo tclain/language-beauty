@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/static/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 81);
@@ -9741,6 +9741,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__style_index_scss__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__style_index_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__style_index_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_http__ = __webpack_require__(185);
+
+
+
 
 
 
@@ -22222,6 +22228,43 @@ var ReactDOMInvalidARIAHook = {
 module.exports = ReactDOMInvalidARIAHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
+/***/ }),
+/* 184 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: /Users/tclain/dev/labs/language-beauty/client/style/index.scss Unexpected token (1:10)\nYou may need an appropriate loader to handle this file type.\n| html, body{\n|     height : 100%;\n|     min-height: 100%;");
+
+/***/ }),
+/* 185 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export request */
+/**
+ * 
+ * simple json http client
+ * 
+ * @export
+ * @param {any} uri 
+ * @param {any} [data=null] 
+ * @param {string} [method="GET"] 
+ * @returns 
+ */
+function request(uri, data = null, method = "GET") {
+    console.log(arguments);
+    const config = {
+        method,
+        headers: new Headers({
+            "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(data || {})
+    };
+    console.log("config", config);
+    return fetch(uri, config).then(res => res.json());
+}
+
+window.request = request;
+
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.b73e1784fd3ac5f501c1.js.map
+//# sourceMappingURL=main.8ffaa845b0d6d2c2b2b1.js.map
