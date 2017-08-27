@@ -1,6 +1,5 @@
 Vue.use(VueMaterial);
 
-var portions = db.portions;
 
 
 Vue.use('territory', {
