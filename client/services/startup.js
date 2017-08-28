@@ -1,5 +1,6 @@
-import {processsampledata} from './data';
+import data from './data';
 
 export function startup(){
-    return processsampledata();
+    return data.processsampledata()
+            .then(ok => data.rawtext({offset : 0}));
 }

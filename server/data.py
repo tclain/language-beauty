@@ -1,7 +1,8 @@
 import os, nltk
 from nltk import word_tokenize
 from nltk.tokenize import sent_tokenize
-from lib.Text import Text as MemoryText 
+from lib.Text import Text as MemoryText
+import shelve 
 
 '''
 GLOBALS
@@ -16,6 +17,7 @@ cache = {
     "sentences" : None,
     "nlp" : None
 }
+
 
 def process_sample_data(payload={}):
     '''
@@ -44,6 +46,7 @@ def tokenize(payload={}):
          cache["words"] = nltk.word_tokenize(raw)
     if not cache["sentences"]:
         cache["sentences"] = sent_tokenize(raw)
+        print "parsed sentences", len(cache['sentences'])
     if not cache["nlp"] :
         cache["nlp"] = MemoryText(cache.get('words'))
     return True
@@ -53,40 +56,71 @@ def get_raw_text(payload={}):
     return a slice of raw text
     @param payload {dict} the option from request
     '''
-    offset = payload.get('offset', 0)
-    length = payload.get('length', 20)
+    data = payload.get('data', {})
+    offset = data.get('offset', 0)
+    length = data.get('length', 20)
+
+    print data, offset, length
     sentences = cache.get('sentences', None)
-    if not (sentences and offset and length) : raise Exception('Text data has not been parsed for now')
+    if not (sentences) : raise Exception('Text data has not been parsed for now')
     
     start = offset * length
-    end = start + offset
-    return sentences[start:end]
+    end = start + length
+
+    with_return = [[word for word in sentence.split(' ')] for sentence in sentences[start:end]]
+    no_return_char = []
+    for sentence in with_return:
+        new_sentence = []
+        for word in sentence : 
+            split_return = [part for part in word.split("\r\n") if part != ""]
+            if len(split_return) > 0:
+                new_sentence = new_sentence + split_return
+            else:
+                new_sentence.append(word)
+        no_return_char.append(new_sentence)
+    return no_return_char
 
 def concordance(payload={}):
     '''
     get usage for a given word
     '''
     data = payload.get('data', None)
-
-    print 'data received, concordance', data
-
     nlp = cache.get('nlp', None )
     if not (data and nlp): raise Exception('Data must be parsed. data key is mandatory')
+
+    data = data.replace(',', '')
     return nlp.concordance(data)
 
 def entities(payload):
+    '''
+    tag each word of the expression with its type
+    '''
     data = payload.get('data', None)
     nlp = cache.get('nlp', None )
     if not (data and nlp): raise Exception('Data must be parsed. data key is mandatory')
+    data = data.replace(',', '')
 
 def similar(payload={}):
     '''
-    get usage for a given word
+    get similar for a given word
     '''
     data = payload.get('data', None)
     nlp = cache.get('nlp', None )
     if not (data and nlp): raise Exception('Data must be parsed. data key is mandatory')
+    data = data.replace(',', '')
     return nlp.similar(data)
+
+def insights(payload={}):
+    ''' 
+    get a summary of all possible insights for a given word
+    '''
+    return {
+        "similar" : similar(payload),
+        "concordance" : concordance(payload),
+    }
+
+
+
 
 if __name__ == "__main__":
     process_sample_data(None)

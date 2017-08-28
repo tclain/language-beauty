@@ -1,25 +1,8 @@
 import React from 'react';
+import Text from './Text';
 
-const Text = ({data}) => {
-    const sentences = data;
-    <div class="text">
-        {
-            sentences.map(sentence => (
-                <div className="sentence">
-                    {
-                        sentence.map(word => (
-                            <span className="word">{word}</span>
-                            )
-                        )
-                    }
-                </div>
-            ))
-        }
-    </div>
-}
-
-export default ({data}) => (
+export default props => (
     <div className="module explore">
-        {data && <Text data={props.data || []} /> }
+        {props.data && <Text {...props}/> }
     </div>
 )

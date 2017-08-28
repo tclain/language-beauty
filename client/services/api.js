@@ -3,7 +3,7 @@ import {request} from './http';
 /**
  * @param {String} API_ROOT the base uri for backend API
  */
-const API_ROOT = "http://"+window.location.host;
+const API_ROOT = window.location.origin;
 
 /**
  * 

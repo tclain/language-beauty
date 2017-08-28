@@ -1,8 +1,8 @@
 from flask import Flask, request, send_from_directory, abort, jsonify
 from datetime import datetime
 from server.api import methods
-app = Flask(__name__, static_folder='static')
 
+app = Flask(__name__, static_folder='static')
 
 '''
 generic routes
