@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rm static/main.*js*
+npm run build
 git add .
 git commit -m "DEPLOY HEROKU $1" 
 git push heroku master
