@@ -23142,7 +23142,7 @@ const FocusOn = props => {
 
 
 function startup() {
-    return __WEBPACK_IMPORTED_MODULE_0__data__["a" /* default */].processsampledata().then(ok => __WEBPACK_IMPORTED_MODULE_0__data__["a" /* default */].rawtext({ offset: 0 }));
+    return __WEBPACK_IMPORTED_MODULE_0__data__["a" /* default */].rawtext({ offset: 0 });
 }
 
 /***/ }),
@@ -23216,4 +23216,4 @@ window.request = request;
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.d35953f874a332248692.js.map
+//# sourceMappingURL=main.6001e44eed6bcd8840ae.js.map

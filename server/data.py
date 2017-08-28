@@ -25,6 +25,7 @@ def process_sample_data(payload={}):
     '''
     load_sample_data(None)
     tokenize(None)
+    print "parsing ok"
     return True
 
 def load_sample_data(payload={}):
@@ -121,9 +122,7 @@ def insights(payload={}):
 
 
 
-
-if __name__ == "__main__":
-    process_sample_data(None)
-    print concordance({"data" : "love"})
+### init parsing
+process_sample_data(None)
 
     
