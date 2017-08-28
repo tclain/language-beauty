@@ -17,7 +17,6 @@ export function request(uri, data=null, method="GET"){
         }),
         body: JSON.stringify(data || {})
     }
-    console.log("config", config);
     return fetch(uri, config).then(res => res.json());
 }
 

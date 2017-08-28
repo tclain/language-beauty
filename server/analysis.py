@@ -1,2 +1,0 @@
-def contextFor(expression):
-    pass

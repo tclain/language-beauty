@@ -23,11 +23,11 @@ def rpc(method):
     '''
     body = request.get_json(force=True)
     process = methods.get(method, None)
-    print "process", process, body
     if process is not None:
         try : 
             return jsonify( { "data" : process(body) })
-        except Exception :
+        except Exception as e :
+            print e
             abort(500)
     # 404 if no methods exists 
     return abort(404)

@@ -1,7 +1,9 @@
+import {request} from './http';
+
 /**
  * @param {String} API_ROOT the base uri for backend API
  */
-const API_ROOT = window.location.host;
+const API_ROOT = "http://"+window.location.host;
 
 /**
  * 
@@ -24,9 +26,5 @@ export function apiURI(endpoint){
  * @returns 
  */
 export function rpc(name, payload=null){
-    return fetch({
-        url : apiURI('methods'),
-        method : 'POST',
-        formData : payload
-    }).then(response => response.json())
+    return request(apiURI("rpc/"+name), payload, "POST");    
 }
