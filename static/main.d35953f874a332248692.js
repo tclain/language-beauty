@@ -22287,7 +22287,7 @@ exports = module.exports = __webpack_require__(187)(undefined);
 
 
 // module
-exports.push([module.i, "html, body, #app {\n  height: 100%;\n  margin: 0px; }\n\n.layout {\n  height: 100%;\n  display: flex;\n  align-items: flex-start;\n  justify-content: center; }\n  .layout .menu {\n    position: fixed;\n    background: white !important;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    font-family: 'Oswald', serif;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center; }\n    .layout .menu .menu-item {\n      font-size: 2em;\n      padding-left: 15px;\n      letter-spacing: 0.3em;\n      text-transform: uppercase;\n      color: #bfbfbf; }\n    .layout .menu .menu-item-selected {\n      color: black;\n      font-weight: bold; }\n    .layout .menu .dimmed {\n      color: #afafaf; }\n  .layout .content {\n    flex: 1;\n    padding: 20px;\n    padding-top: 130px;\n    width: 100%;\n    font-size: 1.3em;\n    overflow: auto;\n    display: flex;\n    align-items: flex-start;\n    justify-content: flex-start;\n    max-width: 900px; }\n\n.explore {\n  flex-grow: 1; }\n\n.insights {\n  padding: 15px;\n  flex-grow: 1;\n  border-left: 1px solid black; }\n\ninput {\n  padding: 5px;\n  border: 3px solid #ababab; }\n  input:focus, input:hover {\n    border: 3px solid black; }\n\nbutton {\n  border: 3px solid #404040;\n  background: white;\n  padding: 5px;\n  cursor: pointer; }\n  button:focus, button:hover {\n    border: 3px solid black; }\n\n.explore .text {\n  font-family: 'Playfair Display', serif; }\n  .explore .text .sentence {\n    line-height: 50px;\n    font-size: 30px;\n    margin-bottom: 10px;\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap; }\n    .explore .text .sentence .word {\n      margin-left: 5px;\n      padding: 1px;\n      cursor: pointer;\n      transition: 0.3s ease-in-out all; }\n      .explore .text .sentence .word:hover {\n        color: #0A97FF; }\n    .explore .text .sentence .word--selected {\n      font-weight: bold;\n      background: #0A97FF;\n      color: white; }\n      .explore .text .sentence .word--selected:hover {\n        color: white; }\n", ""]);
+exports.push([module.i, "html, body, #app {\n  height: 100%;\n  margin: 0px;\n  overflow: hidden; }\n\n.layout {\n  height: 100%;\n  flex-direction: column;\n  display: flex;\n  align-items: center;\n  justify-content: flex-start;\n  border-bottom: 1px solid #dedede; }\n  .layout .title {\n    height: 100px;\n    background: white !important;\n    font-family: 'Oswald', serif;\n    font-size: 2em;\n    padding: 20px;\n    letter-spacing: 0.3em;\n    text-transform: uppercase;\n    color: black;\n    font-weight: bold; }\n    .layout .title .dimmed {\n      color: #afafaf; }\n  .layout .content {\n    flex: 1;\n    padding: 20px;\n    width: 100%;\n    font-size: 1.3em;\n    display: flex;\n    align-items: stretch;\n    justify-content: center;\n    max-width: 900px;\n    overflow: hidden; }\n\n.module {\n  flex: 1;\n  overflow: auto;\n  padding: 10px; }\n\n.insights {\n  font-family: 'Oswald', serif; }\n  .insights h3 {\n    margin-top: 5px; }\n  .insights .word-origin {\n    font-weight: bold;\n    text-transform: uppercase; }\n\ninput {\n  padding: 5px;\n  border: 3px solid #ababab; }\n  input:focus, input:hover {\n    border: 3px solid black; }\n\nbutton {\n  border: 3px solid #404040;\n  background: white;\n  padding: 5px;\n  cursor: pointer; }\n  button:focus, button:hover {\n    border: 3px solid black; }\n\n.explore .text {\n  font-family: 'Playfair Display', serif; }\n  .explore .text .sentence {\n    line-height: 50px;\n    font-size: 30px;\n    margin-bottom: 10px;\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap; }\n    .explore .text .sentence .word {\n      margin-left: 5px;\n      padding: 1px;\n      cursor: pointer;\n      transition: 0.3s ease-in-out all; }\n      .explore .text .sentence .word:hover {\n        color: #0A97FF; }\n    .explore .text .sentence .word--selected {\n      font-weight: bold;\n      background: #0A97FF;\n      color: white; }\n      .explore .text .sentence .word--selected:hover {\n        color: white; }\n", ""]);
 
 // exports
 
@@ -22954,18 +22954,14 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 /* harmony default export */ __webpack_exports__["a"] = (props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "div",
-    { className: "menu" },
+    { className: "title" },
+    "Explore ",
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
+    " ",
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { className: "menu-item menu-item-selected" },
-        "Explore ",
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
-        " ",
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "span",
-            { className: "dimmed" },
-            "Pride and Prejudice (Jane Austen)"
-        )
+        "span",
+        { className: "dimmed" },
+        "Pride and Prejudice (Jane Austen)"
     )
 ));
 
@@ -23101,22 +23097,8 @@ const FocusOn = props => {
         { className: 'module insights' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'h3',
-            null,
+            { 'class': 'word-origin' },
             props.word
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h3',
-            null,
-            'Usage'
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'ul',
-            null,
-            insights.concordance.map(ref => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                { key: ref },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(FocusOn, { text: ref, target: props.word })
-            ))
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'h3',
@@ -23131,6 +23113,20 @@ const FocusOn = props => {
                 { key: ref },
                 ref,
                 ', '
+            ))
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h3',
+            null,
+            'Usage'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'ul',
+            null,
+            insights.concordance.map(ref => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'li',
+                { key: ref },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(FocusOn, { text: ref, target: props.word })
             ))
         )
     );
@@ -23220,4 +23216,4 @@ window.request = request;
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.a8c7d6d0d0da46eb0f72.js.map
+//# sourceMappingURL=main.d35953f874a332248692.js.map

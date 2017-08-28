@@ -1,37 +1,28 @@
 html, body, #app{
     height : 100%;
     margin : 0px;
+    overflow: hidden;
 }
 
 $gutter : 30px;
 
 .layout{
     height : 100%;
+    flex-direction: column;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    .menu{
-        position: fixed;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom : 1px solid #dedede;
+    .title{
+        height: 100px;
         background: white !important;
-        top: 0px;
-        left: 0px;
-        right : 0px;
         font-family: 'Oswald', serif;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        .menu-item{
-            font-size: 2em;
-            padding-left : 15px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color : #bfbfbf;
-        }
-        .menu-item-selected{
-            color : black;
-            font-weight: bold;
-        }
+        font-size: 2em;
+        padding: 20px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color : black;
+        font-weight: bold;
         .dimmed{
             color : #afafaf;
         }
@@ -39,25 +30,34 @@ $gutter : 30px;
     .content{
         flex : 1;
         padding : 20px;
-        padding-top : 130px;
         width: 100%;
         font-size : 1.3em;
-        overflow: auto;
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
+        align-items: stretch;
+        justify-content: center;
         max-width: 900px;
+        overflow: hidden;
+        
     }
 }
 
-.explore{
-    flex-grow : 1;
+.module{
+    flex : 1;
+    overflow: auto;
+    padding : 10px;
 }
+
 .insights{
-    padding : 15px;
-    flex-grow : 1;
-    border-left : 1px solid black;
+    font-family: 'Oswald', serif;
+    h3{
+        margin-top : 5px;
+    }
+    .word-origin{
+        font-weight: bold;
+        text-transform: uppercase;
+    }
 }
+
 
 
 
