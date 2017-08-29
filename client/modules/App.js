@@ -100,7 +100,7 @@ export default class App extends React.Component {
                     &&
                     <Explore data={this.state.content} selected={this.state.selected} onSelect={this.selectWord} /> 
                 }
-                <Insights insights={this.state.insights} word={this.state.selected.originWord} />    
+                { !this.state.loading && <Insights insights={this.state.insights} word={this.state.selected.originWord} />   }
             </div>
         </div>)
     }

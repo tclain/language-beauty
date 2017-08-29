@@ -22935,7 +22935,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 'div',
                 { className: 'content' },
                 this.state.itemSelected == "explore" && !this.state.loading && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Explore__["a" /* default */], { data: this.state.content, selected: this.state.selected, onSelect: this.selectWord }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Insights__["a" /* default */], { insights: this.state.insights, word: this.state.selected.originWord })
+                !this.state.loading && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Insights__["a" /* default */], { insights: this.state.insights, word: this.state.selected.originWord })
             )
         );
     }
@@ -23091,7 +23091,16 @@ const FocusOn = props => {
 
 /* harmony default export */ __webpack_exports__["a"] = (props => {
     const insights = props.insights;
-    if (!insights) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'insights' });
+    if (!insights) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'module insights' },
+        ' ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h3',
+            null,
+            'Click a word to start'
+        )
+    );
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'module insights' },
@@ -23216,4 +23225,4 @@ window.request = request;
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.6001e44eed6bcd8840ae.js.map
+//# sourceMappingURL=main.28bd07d53567235979ce.js.map

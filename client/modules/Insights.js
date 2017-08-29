@@ -12,7 +12,7 @@ const FocusOn = props => {
 
 export default props => {
     const insights = props.insights;
-    if(!insights) return <div className="insights"></div>
+    if(!insights) return <div className="module insights"> <h3>Click a word to start</h3></div>
     return (<div className="module insights">
         <h3 class="word-origin">{props.word}</h3>
         <h3>Similar words in the work</h3>
