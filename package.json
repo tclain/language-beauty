@@ -18,8 +18,10 @@
     "webpack": "^3.5.5"
   },
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "recompose": "^0.25.0"
   },
   "scripts": {
     "clean": "rm -f static/main.*js*",

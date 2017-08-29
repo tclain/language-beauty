@@ -1,6 +1,6 @@
 /**
  * 
- * simple json http client
+ * simple json http client based on fetch
  * 
  * @export
  * @param {any} uri 
@@ -9,7 +9,6 @@
  * @returns 
  */
 export function request(uri, data=null, method="GET"){
-    console.log(arguments);
     const config = {
         method,
         headers : new Headers({
@@ -19,5 +18,3 @@ export function request(uri, data=null, method="GET"){
     }
     return fetch(uri, config).then(res => res.json());
 }
-
-window.request = request

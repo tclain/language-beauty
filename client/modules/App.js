@@ -1,113 +1,107 @@
 import React from 'react';
 import Menu from './Menu';
-import Import from './Import'
 import Explore from './Explore';
 import Insights from './Insights';
-import {startup} from '../services/startup';
+import { startup } from '../services/startup';
 import rpc from '../services/data';
 
-/**
- * the only "container of the app", aware of sideeffects
- * 
- * @export
- * @class App
- * @extends {React.Component}
- */
-export default class App extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            itemSelected : "explore",
-            loading : false,
-            // relevant data
-            content : [],
-            selected : {
-                originWord : null,
-                sentence : null,
-                word : null
-            },
-            // current analysis
-            insights : null,
-            rawOffset : 0,
-        }
-        // bind functions
-        this.updateSelectedMenuItem = this.updateSelectedMenuItem.bind(this);
-        this.selectWord = this.selectWord.bind(this);
-    }
-    
-    componentDidMount(){
-        this.setState({loading : true});
-        startup().then(initialText => this.setState({content : initialText, loading: false})).catch(err => this.setState({loading : false}));
-    }
+import { compose, withReducer, lifecycle, withProps } from 'recompose';
+import { reducer, defaultState } from './App.reducer';
 
-    /**
-     * 
-     * update current selected menu item
-     * 
-     * @param {any} item 
-     * @memberof App
-     */
-    updateSelectedMenuItem(item) {
-        this.setState({itemSelected : item});
-    }
-
-    /**
-     * select a specific word for further analysis
-     * 
-     * @param {any} sentencesIdx 
-     * @param {any} wordIdx 
-     * @memberof App
-    
-     * 
-     */
-    selectWord(sentenceIdx, wordIdx){
-        this.setState({insights : null});
-        if(this.state.selected.sentence == sentenceIdx && this.state.selected.word == wordIdx){
-            this.setState({
-                ...this.state, 
-                selected : {
-                    originWord : null,
-                    sentence : null,
-                    word : null
-                },
-                insights : null
-            })
-        }
-        else {
-            const originWord = this.state.content[sentenceIdx][wordIdx];
-            this.setState({
-                ...this.state, 
-                selected : {
-                    originWord : originWord,
-                    sentence : sentenceIdx,
-                    word : wordIdx
-                }
-            })
-
-            rpc.insights(originWord).then(insights => {
-                this.setState({insights}, () => console.log(this.state))
+const AppContainer = compose(
+    withReducer('state', 'dispatch', reducer, defaultState),
+    withProps(({ dispatch, state }) => ({
+        bootstrap: () => {
+            dispatch({
+                type: "loading",
+                payload: true
             });
-        }
-    }
+            startup().then(initialText => {
+                dispatch({
+                    type: "loading",
+                    payload: false
+                })
+                dispatch({
+                    type: "content",
+                    payload: initialText
+                })
+            }).catch(err => {
+                dispatch({
+                    type: "loading",
+                    payload: false
+                })
+                dispatch({
+                    type: "error",
+                    payload: false
+                })
+            });
+        },
+        selectWord: (sentenceIndex, wordIndex) => {
+            const content = state.content;
+            const selected = state.selected;
+            // get the word
+            const originWord = content[sentenceIndex][wordIndex];
+            const sameAsLastSelected = selected.sentence == sentenceIndex && selected.word == wordIndex;
 
-    /**
-     * 
-     * render component
-     * 
-     * @returns 
-     * @memberof App
-     */
+            // the user clicked again on the same word
+            if (sameAsLastSelected) {
+                dispatch({
+                    type: "selectWord",
+                    payload: {
+                        originWord: null,
+                        sentence: null,
+                        word: null
+                    }
+                })
+            }
+            else {
+                dispatch({
+                    type: "selectWord",
+                    payload: {
+                        originWord,
+                        sentence: sentenceIndex,
+                        word: wordIndex
+                    }
+                });
+                // run side effects /- we would have used -/
+                rpc.insights(originWord).then(insights => {
+                    dispatch({
+                        type: 'insights',
+                        payload: insights
+                    })
+                });
+            }
+        }
+    })
+    )
+)
+
+
+
+class AppComponent extends React.Component {
+    componentDidMount() {
+        this.props.bootstrap();
+    }
     render() {
+        const state = this.props.state
+        const props = this.props;
         return (<div className="layout">
-            <Menu onSelectItem={this.updateSelectedMenuItem} selected={this.state.itemSelected} />
+            <Menu />
             <div className="content">
                 {
-                    this.state.itemSelected == "explore" && !this.state.loading 
+                    !state.loading
                     &&
-                    <Explore data={this.state.content} selected={this.state.selected} onSelect={this.selectWord} /> 
+                    <Explore data={state.content} selected={state.selected} onSelect={props.selectWord} />
                 }
-                { !this.state.loading && <Insights insights={this.state.insights} word={this.state.selected.originWord} />   }
+                {
+                    !state.loading
+                    &&
+                    <Insights insights={state.insights} word={state.selected.originWord} />
+                }
             </div>
         </div>)
     }
 }
+
+
+export default AppContainer(AppComponent);

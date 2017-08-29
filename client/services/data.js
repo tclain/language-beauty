@@ -9,6 +9,9 @@ const methods = [
     "insights"
 ]
 
+/**
+ * dynamic building of rpc client function
+ */
 const rpcFn = methods.reduce((previous, current) => {
     return {
         ...previous,
@@ -20,7 +23,5 @@ const rpcFn = methods.reduce((previous, current) => {
         }
     }
 }, {})
-
-window.rpcs = rpcFn
 
 export default rpcFn;
