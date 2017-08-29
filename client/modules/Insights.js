@@ -1,15 +1,10 @@
 import React from 'react';
+import FocusOn from '../components/FocusOn';
 
-const FocusOn = props => {
-    const target = props.target.replace(',','');
-    const text = props.text;
-    const split = text.split(' ');
-    return <span> {
-            split.map(part => part == target ? <b key={part}>{part} </b> : <span>{part} </span>)
-        }
-    </span>
-}
 
+/**
+ * Highlights on the right for a given word
+ */
 export default props => {
     const insights = props.insights;
     if(!insights) return <div className="module insights"> <h3>Click a word to start</h3></div>

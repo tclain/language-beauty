@@ -2,7 +2,7 @@ import os, nltk
 from nltk import word_tokenize
 from nltk.tokenize import sent_tokenize
 from lib.Text import Text as MemoryText
-import shelve 
+
 
 '''
 GLOBALS
@@ -91,15 +91,6 @@ def concordance(payload={}):
 
     data = data.replace(',', '')
     return nlp.concordance(data)
-
-def entities(payload):
-    '''
-    tag each word of the expression with its type
-    '''
-    data = payload.get('data', None)
-    nlp = cache.get('nlp', None )
-    if not (data and nlp): raise Exception('Data must be parsed. data key is mandatory')
-    data = data.replace(',', '')
 
 def similar(payload={}):
     '''

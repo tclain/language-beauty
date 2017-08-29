@@ -6,7 +6,13 @@ import Insights from './Insights';
 import {startup} from '../services/startup';
 import rpc from '../services/data';
 
-
+/**
+ * the only "container of the app", aware of sideeffects
+ * 
+ * @export
+ * @class App
+ * @extends {React.Component}
+ */
 export default class App extends React.Component {
     constructor(props){
         super(props);

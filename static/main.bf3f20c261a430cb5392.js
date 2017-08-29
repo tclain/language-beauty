@@ -22831,9 +22831,9 @@ module.exports = function (css) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Menu__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Import__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Explore__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Insights__ = __webpack_require__(195);
+throw new Error("Cannot find module \"./Import\"");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Explore__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Insights__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_startup__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_data__ = __webpack_require__(82);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -22846,6 +22846,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+/**
+ * the only "container of the app", aware of sideeffects
+ * 
+ * @export
+ * @class App
+ * @extends {React.Component}
+ */
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     constructor(props) {
         super(props);
@@ -22952,6 +22959,9 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
+/**
+ * Top menu
+ */
 /* harmony default export */ __webpack_exports__["a"] = (props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "div",
     { className: "title" },
@@ -22972,51 +22982,18 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-
-
-/* unused harmony default export */ var _unused_webpack_default_export = (props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    "div",
-    { className: "import module" },
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { className: "input-group" },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", "class": "input" }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "button",
-            null,
-            "Import"
-        )
-    ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { className: "input-group" },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "button",
-            null,
-            "Import sample data"
-        )
-    )
-));
-
-/***/ }),
-/* 193 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Text__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Text__ = __webpack_require__(193);
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = (props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
     { className: 'module explore' },
-    props.data && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Text__["a" /* default */], props)
+    props.data && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_Text__["a" /* default */], props)
 ));
 
 /***/ }),
-/* 194 */
+/* 193 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23059,36 +23036,19 @@ const Text = ({ data, onSelect, selected }) => {
 /* harmony default export */ __webpack_exports__["a"] = (Text);
 
 /***/ }),
-/* 195 */
+/* 194 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_FocusOn__ = __webpack_require__(195);
 
 
-const FocusOn = props => {
-    const target = props.target.replace(',', '');
-    const text = props.text;
-    const split = text.split(' ');
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'span',
-        null,
-        ' ',
-        split.map(part => part == target ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'b',
-            { key: part },
-            part,
-            ' '
-        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'span',
-            null,
-            part,
-            ' '
-        ))
-    );
-};
 
+/**
+ * Highlights on the right for a given word
+ */
 /* harmony default export */ __webpack_exports__["a"] = (props => {
     const insights = props.insights;
     if (!insights) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -23135,11 +23095,48 @@ const FocusOn = props => {
             insights.concordance.map(ref => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'li',
                 { key: ref },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(FocusOn, { text: ref, target: props.word })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components_FocusOn__["a" /* default */], { text: ref, target: props.word })
             ))
         )
     );
 });
+
+/***/ }),
+/* 195 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+/**
+ * Helper components that highlights a given word in a text
+ * @param {*} props 
+ */
+const FocusOn = props => {
+    const target = props.target.replace(',', '');
+    const text = props.text;
+    const split = text.split(' ');
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'span',
+        null,
+        ' ',
+        split.map(part => part == target ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'b',
+            { style: { color: "blue" }, key: part },
+            part,
+            ' '
+        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'span',
+            null,
+            part,
+            ' '
+        ))
+    );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (FocusOn);
 
 /***/ }),
 /* 196 */
@@ -23225,4 +23222,4 @@ window.request = request;
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.28bd07d53567235979ce.js.map
+//# sourceMappingURL=main.bf3f20c261a430cb5392.js.map

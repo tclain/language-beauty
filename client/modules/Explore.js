@@ -1,5 +1,5 @@
 import React from 'react';
-import Text from './Text';
+import Text from '../components/Text';
 
 export default props => (
     <div className="module explore">
